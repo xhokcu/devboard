@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { useAuthStore } from '@/store/authStore'
 import AuthPage from '@/features/auth/AuthPage'
+import LandingPage from '@/features/landing/LandingPage'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated)
@@ -16,6 +17,10 @@ export { ProtectedRoute, PublicRoute }
 
 export const router = createBrowserRouter([
   {
+    path: '/',
+    element: <LandingPage />,
+  },
+  {
     path: '/auth',
     element: (
       <PublicRoute>
@@ -24,7 +29,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: '/',
+    path: '/board',
     element: (
       <ProtectedRoute>
         <div className="p-8 text-2xl font-bold">Board coming soon...</div>
